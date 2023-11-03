@@ -301,7 +301,8 @@ class Hotel {
         for (i = 0; i < 10; i++) {
           if (hotel_ob.luxury_DoubleRoom[rn].food.get(i) != null) {
             System.out.println(hotel_ob.luxury_DoubleRoom[rn].food.get(i).itemno + " "
-                + hotel_ob.luxury_DoubleRoom[rn].food.get(i).quantity + " " + hotel_ob.luxury_DoubleRoom[rn].food.get(i).price);
+                + hotel_ob.luxury_DoubleRoom[rn].food.get(i).quantity + " "
+                + hotel_ob.luxury_DoubleRoom[rn].food.get(i).price);
             total += hotel_ob.luxury_DoubleRoom[rn].food.get(i).price;
           }
         }
@@ -312,7 +313,8 @@ class Hotel {
         for (i = 0; i < 10; i++) {
           if (hotel_ob.deluxe_DoubleRoom[rn].food.get(i) != null) {
             System.out.println(hotel_ob.deluxe_DoubleRoom[rn].food.get(i).itemno + " "
-                + hotel_ob.deluxe_DoubleRoom[rn].food.get(i).quantity + " " + hotel_ob.deluxe_DoubleRoom[rn].food.get(i).price);
+                + hotel_ob.deluxe_DoubleRoom[rn].food.get(i).quantity + " "
+                + hotel_ob.deluxe_DoubleRoom[rn].food.get(i).price);
             total += hotel_ob.deluxe_DoubleRoom[rn].food.get(i).price;
           }
         }
@@ -323,7 +325,8 @@ class Hotel {
         for (i = 0; i < 10; i++) {
           if (hotel_ob.luxury_SingleRoom[rn].food.get(i) != null) {
             System.out.println(hotel_ob.luxury_SingleRoom[rn].food.get(i).itemno + " "
-                + hotel_ob.luxury_SingleRoom[rn].food.get(i).quantity + " " + hotel_ob.luxury_SingleRoom[rn].food.get(i).price);
+                + hotel_ob.luxury_SingleRoom[rn].food.get(i).quantity + " "
+                + hotel_ob.luxury_SingleRoom[rn].food.get(i).price);
             total += hotel_ob.luxury_SingleRoom[rn].food.get(i).price;
           }
         }
@@ -334,7 +337,8 @@ class Hotel {
         for (i = 0; i < 10; i++) {
           if (hotel_ob.deluxe_SingleRoom[rn].food.get(i) != null) {
             System.out.println(hotel_ob.deluxe_SingleRoom[rn].food.get(i).itemno + " "
-                + hotel_ob.deluxe_SingleRoom[rn].food.get(i).quantity + " " + hotel_ob.deluxe_SingleRoom[rn].food.get(i).price);
+                + hotel_ob.deluxe_SingleRoom[rn].food.get(i).quantity + " "
+                + hotel_ob.deluxe_SingleRoom[rn].food.get(i).price);
             total += hotel_ob.deluxe_SingleRoom[rn].food.get(i).price;
           }
         }
@@ -348,4 +352,82 @@ class Hotel {
     System.out.println("---------------------------------------------");
     System.out.println("Total Price: " + total);
     System.out.println("---------------------------------------------");
+  }
+
+  static void deallocate(int rn, int rtype) {
+    int j;
+    char w;
+    switch (rtype) {
+      case 1:
+        if (hotel_ob.luxury_DoubleRoom[rn] != null) {
+          System.out.println("Room used by " + hotel_ob.luxury_DoubleRoom[rn].name);
+        } else {
+          System.out.println("Empty room");
+          return;
+        }
+        System.out.print("Do you want to checkout? (y/n): ");
+        w = sc.next().charAt(0);
+        if (w == 'y' || w == 'Y') {
+          bill(rn, rtype);
+          hotel_ob.luxury_DoubleRoom[rn] = null;
+          System.out.println("Room deallocated");
+        } else {
+          System.out.println("Thank you for staying");
+        }
+        break;
+      case 2:
+        if (hotel_ob.deluxe_DoubleRoom[rn] != null) {
+          System.out.println("Room used by " + hotel_ob.deluxe_DoubleRoom[rn].name);
+        } else {
+          System.out.println("Empty room");
+          return;
+        }
+        System.out.print("Do you want to checkout? (y/n): ");
+        w = sc.next().charAt(0);
+        if (w == 'y' || w == 'Y') {
+          bill(rn, rtype);
+          hotel_ob.deluxe_DoubleRoom[rn] = null;
+          System.out.println("Room deallocated");
+        } else {
+          System.out.println("Thank you for staying");
+        }
+        break;
+      case 3:
+        if (hotel_ob.luxury_SingleRoom[rn] != null) {
+          System.out.println("Room used by " + hotel_ob.luxury_SingleRoom[rn].name);
+        } else {
+          System.out.println("Empty room");
+          return;
+        }
+        System.out.print("Do you want to checkout? (y/n): ");
+        w = sc.next().charAt(0);
+        if (w == 'y' || w == 'Y') {
+          bill(rn, rtype);
+          hotel_ob.luxury_SingleRoom[rn] = null;
+          System.out.println("Room deallocated");
+        } else {
+          System.out.println("Thank you for staying");
+        }
+        break;
+      case 4:
+        if (hotel_ob.deluxe_SingleRoom[rn] != null) {
+          System.out.println("Room used by " + hotel_ob.deluxe_SingleRoom[rn].name);
+        } else {
+          System.out.println("Empty room");
+          return;
+        }
+        System.out.print("Do you want to checkout? (y/n): ");
+        w = sc.next().charAt(0);
+        if (w == 'y' || w == 'Y') {
+          bill(rn, rtype);
+          hotel_ob.deluxe_SingleRoom[rn] = null;
+          System.out.println("Room deallocated");
+        } else {
+          System.out.println("Thank you for staying");
+        }
+        break;
+      default:
+        System.out.println("Wrong option");
+        break;
+    }
   }
