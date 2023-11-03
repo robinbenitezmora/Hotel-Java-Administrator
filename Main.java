@@ -253,35 +253,99 @@ class Hotel {
   static void availability(int i) {
     int j, count = 0;
     switch (i) {
-      case 1: for(j = 0; j < 10; j++) {
-                if(hotel_ob.luxury_DoubleRoom[j] == null) {
-                  count++;
-                }
-              }
-              System.out.println("Number of rooms available: " + count);
-              break;
-      case 2: for(j = 0; j < 20; j++) {
-                if(hotel_ob.deluxe_DoubleRoom[j] == null) {
-                  count++;
-                }
-              }
-              System.out.println("Number of rooms available: " + count);
-              break;
-      case 3: for(j = 0; j < 10; j++) {
-                if(hotel_ob.luxury_SingleRoom[j] == null) {
-                  count++;
-                }
-              }
-              System.out.println("Number of rooms available: " + count);
-              break;
-      case 4: for(j = 0; j < 20; j++) {
-                if(hotel_ob.deluxe_SingleRoom[j] == null) {
-                  count++;
-                }
-              }
-              System.out.println("Number of rooms available: " + count);
-              break;
-      default: System.out.println("Wrong option");
-               break;
+      case 1:
+        for (j = 0; j < 10; j++) {
+          if (hotel_ob.luxury_DoubleRoom[j] == null) {
+            count++;
+          }
+        }
+        System.out.println("Number of rooms available: " + count);
+        break;
+      case 2:
+        for (j = 0; j < 20; j++) {
+          if (hotel_ob.deluxe_DoubleRoom[j] == null) {
+            count++;
+          }
+        }
+        System.out.println("Number of rooms available: " + count);
+        break;
+      case 3:
+        for (j = 0; j < 10; j++) {
+          if (hotel_ob.luxury_SingleRoom[j] == null) {
+            count++;
+          }
+        }
+        System.out.println("Number of rooms available: " + count);
+        break;
+      case 4:
+        for (j = 0; j < 20; j++) {
+          if (hotel_ob.deluxe_SingleRoom[j] == null) {
+            count++;
+          }
+        }
+        System.out.println("Number of rooms available: " + count);
+        break;
+      default:
+        System.out.println("Wrong option");
+        break;
     }
+  }
+
+  static void bill(int rn, int rtype) {
+    float total = 0;
+    int i;
+    System.out.println("\n*****HOTEL BILL*****");
+    System.out.println("---------------------------------------------");
+    switch (rtype) {
+      case 1:
+        for (i = 0; i < 10; i++) {
+          if (hotel_ob.luxury_DoubleRoom[rn].food.get(i) != null) {
+            System.out.println(hotel_ob.luxury_DoubleRoom[rn].food.get(i).itemno + " "
+                + hotel_ob.luxury_DoubleRoom[rn].food.get(i).quantity + " " + hotel_ob.luxury_DoubleRoom[rn].food.get(i).price);
+            total += hotel_ob.luxury_DoubleRoom[rn].food.get(i).price;
+          }
+        }
+        total += hotel_ob.luxury_DoubleRoom[rn].roomprice;
+        System.out.println("Room Price: " + hotel_ob.luxury_DoubleRoom[rn].roomprice);
+        break;
+      case 2:
+        for (i = 0; i < 10; i++) {
+          if (hotel_ob.deluxe_DoubleRoom[rn].food.get(i) != null) {
+            System.out.println(hotel_ob.deluxe_DoubleRoom[rn].food.get(i).itemno + " "
+                + hotel_ob.deluxe_DoubleRoom[rn].food.get(i).quantity + " " + hotel_ob.deluxe_DoubleRoom[rn].food.get(i).price);
+            total += hotel_ob.deluxe_DoubleRoom[rn].food.get(i).price;
+          }
+        }
+        total += hotel_ob.deluxe_DoubleRoom[rn].roomprice;
+        System.out.println("Room Price: " + hotel_ob.deluxe_DoubleRoom[rn].roomprice);
+        break;
+      case 3:
+        for (i = 0; i < 10; i++) {
+          if (hotel_ob.luxury_SingleRoom[rn].food.get(i) != null) {
+            System.out.println(hotel_ob.luxury_SingleRoom[rn].food.get(i).itemno + " "
+                + hotel_ob.luxury_SingleRoom[rn].food.get(i).quantity + " " + hotel_ob.luxury_SingleRoom[rn].food.get(i).price);
+            total += hotel_ob.luxury_SingleRoom[rn].food.get(i).price;
+          }
+        }
+        total += hotel_ob.luxury_SingleRoom[rn].roomprice;
+        System.out.println("Room Price: " + hotel_ob.luxury_SingleRoom[rn].roomprice);
+        break;
+      case 4:
+        for (i = 0; i < 10; i++) {
+          if (hotel_ob.deluxe_SingleRoom[rn].food.get(i) != null) {
+            System.out.println(hotel_ob.deluxe_SingleRoom[rn].food.get(i).itemno + " "
+                + hotel_ob.deluxe_SingleRoom[rn].food.get(i).quantity + " " + hotel_ob.deluxe_SingleRoom[rn].food.get(i).price);
+            total += hotel_ob.deluxe_SingleRoom[rn].food.get(i).price;
+          }
+        }
+        total += hotel_ob.deluxe_SingleRoom[rn].roomprice;
+        System.out.println("Room Price: " + hotel_ob.deluxe_SingleRoom[rn].roomprice);
+        break;
+      default:
+        System.out.println("Wrong option");
+        break;
+    }
+    System.out.println("---------------------------------------------");
+    System.out.println("Total Price: " + total);
+    System.out.println("---------------------------------------------");
   }
