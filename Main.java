@@ -431,3 +431,39 @@ class Hotel {
         break;
     }
   }
+
+  static void orderFood(int rn, int rtype) {
+    int i, q;
+    char wish;
+    try {
+      System.out.println(
+          "\n==========\n   Menu:  \n==========\n\n1.Sandwich\tRs.50\n2.Pasta\t\tRs.60\n3.Noodles\tRs.70\n4.Coke\t\tRs.30\n");
+      do {
+        i = sc.nextLine();
+        System.out.print("Quantity: ");
+        q = sc.nextInt();
+
+        switch (rtype) {
+          case 1:
+            hotel_ob.luxury_DoubleRoom[rn].food.add(new Food(i, q));
+            break;
+          case 2:
+            hotel_ob.deluxe_DoubleRoom[rn].food.add(new Food(i, q));
+            break;
+          case 3:
+            hotel_ob.luxury_SingleRoom[rn].food.add(new Food(i, q));
+            break;
+          case 4:
+            hotel_ob.deluxe_SingleRoom[rn].food.add(new Food(i, q));
+            break;
+        }
+        System.out.print("Do you want to order anything else? (y/n): ");
+        wish = sc.next().charAt(0);
+      } while (wish == 'y' || wish == 'Y');
+    } catch (NullPointerException e) {
+      System.out.println("Room not booked");
+    } catch (Exception e) {
+      System.out.println("Invalid Input");
+    }
+  }
+}
