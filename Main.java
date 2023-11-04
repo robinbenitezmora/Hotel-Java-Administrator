@@ -6,8 +6,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
-import packageName.holder;
-import packageName.holder;
 
 class Food implements Serializable {
   int itemno;
@@ -15,19 +13,19 @@ class Food implements Serializable {
   float price;
 
   Food(String i, int quantity) {
-    this.itemno = i;
+    this.itemno = Integer.parseInt(i);
     this.quantity = quantity;
     switch (i) {
-      case 1:
+      case "1":
         price = quantity * 50;
         break;
-      case 2:
+      case "2":
         price = quantity * 60;
         break;
-      case 3:
+      case "3":
         price = quantity * 70;
         break;
-      case 4:
+      case "4":
         price = quantity * 30;
         break;
     }
@@ -149,7 +147,7 @@ class Hotel {
         hotel_ob.deluxe_SingleRoom[rn] = new Singleroom(name, contact, gender);
         break;
       default:
-        System.out.println();("Wrong option");
+        System.out.println("Wrong option");
         break;
     }
   }
@@ -362,7 +360,7 @@ class Hotel {
   }
 
   static void deallocate(int rn, int rtype) {
-    int j;
+
     char w;
     switch (rtype) {
       case 1:
