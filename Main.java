@@ -14,10 +14,10 @@ class Food implements Serializable {
   int quantity;
   float price;
 
-  Food(int itemno, int quantity) {
-    this.itemno = itemno;
+  Food(String i, int quantity) {
+    this.itemno = i;
     this.quantity = quantity;
-    switch (itemno) {
+    switch (i) {
       case 1:
         price = quantity * 50;
         break;
@@ -149,12 +149,12 @@ class Hotel {
         hotel_ob.deluxe_SingleRoom[rn] = new Singleroom(name, contact, gender);
         break;
       default:
-        System.out.printl("Wrong option");
+        System.out.println();("Wrong option");
         break;
     }
   }
 
-  static void BookRoom(int i) {
+  static void BookRoom(int i) throws NotAvailable {
     int j, rn;
     System.out.println("\nChoose room number from: ");
     switch (i) {
@@ -440,7 +440,8 @@ class Hotel {
   }
 
   static void orderFood(int rn, int rtype) {
-    int i, q;
+    String i;
+    int q;
     char wish;
     try {
       System.out.println(
