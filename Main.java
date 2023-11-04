@@ -1,6 +1,13 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
+import packageName.holder;
+import packageName.holder;
 
 class Food implements Serializable {
   int itemno;
@@ -464,6 +471,104 @@ class Hotel {
       System.out.println("Room not booked");
     } catch (Exception e) {
       System.out.println("Invalid Input");
+    }
+  }
+}
+
+class write implements Runnable {
+  Holder hotel_ob;
+
+  write(Holder hotel_ob) {
+    this.hotel_ob = hotel_ob;
+  }
+
+  @Override
+  public void run() {
+    try {
+      FileOutputStream fout = new FileOutputStream("backup");
+      ObjectOutputStream oos = new ObjectOutputStream(fout);
+      oos.writeObject(hotel_ob);
+      oos.close();
+      fout.close();
+    } catch (Exception e) {
+      System.out.println("Error in writing " + e);
+    }
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    try {
+      File f = new File("backup");
+      if (f.exists()) {
+        FileInputStream fin = new FileInputStream("backup");
+        ObjectInputStream ois = new ObjectInputStream(fin);
+        Hotel.hotel_ob = (Holder) ois.readObject();
+        ois.close();
+        fin.close();
+      }
+      Scanner sc = new Scanner(System.in);
+      int ch, ch2;
+      char wish;
+      x: do {
+        System.out.println(
+            "\nEnter your choice :\n1.Display room details\n2.Display room availability \n3.Book\n4.Order food\n5.Checkout\n6.Exit\n");
+        ch = sc.nextInt();
+        switch (ch) {
+          case 1:
+            System.out.println(
+                "\nChoose room type:\n1.Luxury Double Room\n2.Deluxe Double Room\n3.Luxury Single Room\n4.Deluxe Single Room\n");
+            ch2 = sc.nextInt();
+            Hotel.features(ch2);
+            break;
+          case 2:
+            System.out.println(
+                "\nChoose room type:\n1.Luxury Double Room\n2.Deluxe Double Room\n3.Luxury Single Room\n4.Deluxe Single Room\n");
+            ch2 = sc.nextInt();
+            Hotel.availability(ch2);
+            break;
+          case 3:
+            System.out.println(
+                "\nChoose room type:\n1.Luxury Double Room\n2.Deluxe Double Room\n3.Luxury Single Room\n4.Deluxe Single Room\n");
+            ch2 = sc.nextInt();
+            Hotel.BookRoom(ch2);
+            break;
+          case 4:
+            System.out.println(
+                "\nChoose room type:\n1.Luxury Double Room\n2.Deluxe Double Room\n3.Luxury Single Room\n4.Deluxe Single Room\n");
+            ch2 = sc.nextInt();
+            System.out.print("Room number: ");
+            int rn = sc.nextInt();
+            Hotel.orderFood(rn - 1, ch2);
+            break;
+          case 5:
+            System.out.println(
+                "\nChoose room type:\n1.Luxury Double Room\n2.Deluxe Double Room\n3.Luxury Single Room\n4.Deluxe Single Room\n");
+            ch2 = sc.nextInt();
+            System.out.print("Room number: ");
+            rn = sc.nextInt();
+            Hotel.deallocate(rn - 1, ch2);
+            break;
+          case 6:
+            Thread t = new Thread(new write(Hotel.hotel_ob));
+            t.start();
+            break x;
+          default:
+            System.out.println("Wrong option");
+            break;
+        }
+        System.out.println("\nContinue : (y/n)");
+        wish = sc.next().charAt(0);
+        if (!(wish == 'y' || wish == 'Y' || wish == 'n' || wish == 'N')) {
+          System.out.println("Invalid Input");
+          System.out.println("\nContinue : (y/n)");
+          wish = sc.next().charAt(0);
+        }
+      } while (wish == 'y' || wish == 'Y');
+      Thread t = new Thread(new write(Hotel.hotel_ob));
+      t.start();
+    } catch (Exception e) {
+      System.out.println("Error in main " + e);
     }
   }
 }
